@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Team6PropertyDBModelStoreContainer" CdmEntityContainer="Team6PropertyDBEntities">
+    <EntitySetMapping Name="Properties">
+      <EntityTypeMapping TypeName="Team6PropertyDBModel.Property">
+        <MappingFragment StoreEntitySet="Property">
+          <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+          <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+          <ScalarProperty Name="ListDate" ColumnName="ListDate" />
+          <ScalarProperty Name="PDescription" ColumnName="PDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

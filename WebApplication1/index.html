@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+    <link href="StyleSheet1.css" rel="stylesheet" />
+</head>
+<body>
+<div>
+    <h2>All Products</h2>
+    <ul id="products"/>
+   
+</div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="prodId" size="5"/>
+        <input type="button" value="search" onclick="find();"/>
+        <input type="button" value="search2" onclick="find2();" />
+        
+        <p id="product"/>
+        <p id="selectproduct"/>
+    </div>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/products';
+        var itemdata = null;
+        var selectitem = null;
+        $(document).ready(function () {
+            $.getJSON(uri).done(function (data) {
+                itemdata = data;
+                //console.log(itemdata);
+                $.each(data, function (key, item) {
+                    $('<li>', { text: formatItem(item),value:item.PropertyID }).appendTo($('#products'));
+                });
+            });
+            $('ul').on('click', 'li', function () {
+                //console.log(this);
+                window.location = '/detail.html?id=' + $(this).val();
+               // $('li').removeClass('ui-selected');
+               // $(this).addClass('ui-selected');
+                
+                //find3($(this).val());
+                //var output = $(this).text();
+               
+                //$('#selectproduct').text(output);
+               
+            });
+        });
+
+        function formatItem(item) {
+            return item.PropertyName + ':$' + item.Price;
+        }
+        function formatItem2(item) {
+            return item.PropertyName + ':$' + item.Price + ':$'+item.ListDate;
+        }
+        function find() {
+            var id = $('#prodId').val();
+            $.getJSON(uri + '/' + id)
+            .done(function (data) {
+                $('#product').text(formatItem(data));
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                $('#product').text('Error:'+err);
+            })
+        }
+        
+        function find2() {
+            var id = $('#prodId').val();
+            var result = true;
+            for (var i in itemdata) {
+                if (itemdata[i].PropertyID == id) {
+                    $('#product').text(formatItem(itemdata[i]));
+                    result = false;
+                }
+            }
+            if (result) {
+                $('#product').text('Error:');
+            }
+        }
+
+        function find3(id) {        
+            $.getJSON(uri + '/' + id)
+            .done(function (data) {
+                $('#selectproduct').text(formatItem2(data));
+            })          
+        }
+        
+      
+    </script>
+</body>
+</html>
